@@ -1,0 +1,50 @@
+<div class ="card mt-5 mb-4">
+
+  <div class= "card-body">
+    <h2 class = "text-center"> Member Details </h2>
+  </div>
+</div>
+
+<table class ="table table-bordered">
+  <thead>
+  <tr>
+    <th> Name</th>
+
+    <th>Father Name</th>
+    <th>Mother Name</th>
+    <th>Flat no</th>
+    <th>NID No</th>
+    
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td><%= @member.name%> </td>
+
+      <td><%= @member.father_name%></td>
+      <td><%= @member.mother_name%></td>
+      <td><%= @member.flat_no%></td>
+      <td><%= @member.nid_no%></td>
+      
+      <td>
+        <%#= link_to "show", product_path(@product.id) %>
+        <%= link_to "Edit",edit_member_path(@member.id), class: "btn btn-outline-primary rounded-0"%>
+        <%= link_to "Delete", member_path(@member), method: :delete, class: "btn btn-outline-danger", data: { confirm: 'Are you sure to Delete?' } %>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+
+
+
+
+<%= @member.name%>
+<%= @member.father_name%>
+<%= @member.mother_name%>
+<%= @member.flat_no%>
+<%= @member.nid_no%>
