@@ -14,3 +14,10 @@ member =Member.new(
  flat_no: "8A",
  nid_no: 22335600003
 )
+product =Product.new(
+    name: "CPU",
+    unit: 5,
+    price: 1000,
+    purchase_date:10-10-2023
+
+)

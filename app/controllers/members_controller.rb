@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:edit,:update,:show]
+  before_action :set_member, only: [:edit,:update,:show,:destroy]
   def index
     @members = Member.all
   end
@@ -27,13 +27,14 @@ class MembersController < ApplicationController
     end
   end
   def show
-
   end
+
   def destroy
     if @member.destroy
-      redirect_to members_path, notice: "  #{@member.name} Deleted successfully"
+      redirect_to members_path, notice: "#{@member.name} Deleted successfully"
     end
   end
+
 
   private
     def member_params

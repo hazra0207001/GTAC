@@ -18,7 +18,7 @@
   </div>
    <div class="col-lg-4">
     <label for="formGroupExampleInput" class="form-label">Mothers Name</label>
-    <%= form.text_field :mother_name, class: "form-control",  placeholder: "Mothers Name"     %>
+    <%= form.text_field :mother_name, {class: "form-control",  placeholder: "Mothers Name"}     %>
     <% @member.errors.full_messages_for(:mother_name).each do |message| %>
       <p class="text-danger"><%=message %></p>
     <% end %>

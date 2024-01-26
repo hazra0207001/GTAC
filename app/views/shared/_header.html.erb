@@ -17,6 +17,14 @@
             <%=link_to"Create New Member", new_member_path,class:"nav-link "%>
             </li>
             <li class="nav-item">
+            
+            <%=link_to "Products", {controller: "products", action:"index"},{class:"nav-link "}%>
+            </li>
+             <li class="nav-item">
+            
+            <%=link_to "new product", {controller: "products", action:"new"},{class:"nav-link "}%>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item dropdown">

@@ -1,0 +1,18 @@
+<%= form_for("", url: "/products", html: {method: :post}) do |form| %>
+<br>
+    
+  <%=label(:post, :Name)%>
+  <%= form.text_field :name %>
+  <br>
+  <%=label(:post, :Unit)%>
+  <%= form.number_field :unit %>
+  <br>
+  <%=label(:post, :price)%>  
+  <%= form.number_field :price %>
+  <br>
+  <%=label(:post, :purchase_date)%>
+  <%= form.date_field :purchase_date %>
+  <br>
+  <%= form.submit %>
+
+<% end %>

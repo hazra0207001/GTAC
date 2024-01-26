@@ -35,7 +35,7 @@
                 Actions
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to "show", member_path(member.id), class: "dropdown-item"%></li>
+              <li><%= link_to "show", member_path(member.id), {class: "dropdown-item"} %></li>
               <li><%= link_to "Edit",edit_member_path(member.id), class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
               <li><%= link_to "Delete",member_path(member.id), class: "dropdown-item", method: :delete, data: {confirm: 'Are you sure to Delete?'} %></li>

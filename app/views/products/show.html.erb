@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+        <th>NAME</th>
+        <th>UNIT</th>
+        <th>PRICE</th>
+        <th>PURCHASE DATE</th>
+        <th> ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr>
+                <td><%=@product.name%></td>
+                <td><%=@product.unit%></td>
+                <td><%=@product.price%></td>
+                <td><%=@product.purchase_date%></td>
+                <td><%= link_to "Edit", "/products/#{@product.id}/edit" %></td>
+                <td> <%= link_to "Delete","/products/#{@product.id}", method: :delete %> </td>
+                
+            </tr>
+        
+    </tbody>
+</table>
