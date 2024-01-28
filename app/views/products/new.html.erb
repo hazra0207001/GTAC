@@ -1,18 +1,37 @@
-<%= form_for("", url: "/products", html: {method: :post}) do |form| %>
-<br>
-    
-  <%=label(:post, :Name)%>
+<%= form_for("", url: "/products", html: { method: :post }) do |form| %>
+  <br>
+
+  <%= form.label(:post, :Name) %>
   <%= form.text_field :name %>
   <br>
-  <%=label(:post, :Unit)%>
+
+  <%= form.label(:post, :Unit) %>
   <%= form.number_field :unit %>
   <br>
-  <%=label(:post, :price)%>  
+
+  <%= form.label(:post, :price) %>
   <%= form.number_field :price %>
   <br>
-  <%=label(:post, :purchase_date)%>
+
+  <%= form.label(:post, :purchase_date) %>
   <%= form.date_field :purchase_date %>
   <br>
-  <%= form.submit %>
 
+  <%= form.radio_button :status, true, checked: "checked" %>
+  <%= form.label :status_active, 'Active' %>
+
+  <%= form.radio_button :status, false %>
+  <%= form.label :status_inactive, 'Inactive' %>
+  <br>
+  <%=form.label :category%>
+  
+
+  <%=form.select :category,options_for_select(@categories.map { |category| [category.category_name, category.id] })%>
+  <br>
+  <%@tags.each do|tag|%>
+    <%= form.check_box 'tag_name[]', { id: 'tag' }, tag.tag_name, nil %>
+    <%= form.label "product_tag_ids_#{tag.id}", tag.tag_name %>
+  <%end%>
+
+  <%= form.submit %>
 <% end %>

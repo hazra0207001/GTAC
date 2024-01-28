@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_25_140637) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_26_142648) do
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "name"
     t.string "father_name"
@@ -26,6 +32,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_140637) do
     t.integer "unit"
     t.float "price"
     t.date "purchase_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "status"
+    t.integer "category_id"
+    t.string "tags"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

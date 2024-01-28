@@ -2,16 +2,33 @@
 <%= form_tag "/products/#{params[:id]}", method: :patch do %>
   <%= label_tag :name %>
 <%= text_field_tag 'name', @product.name %>
-
+<br>
 <%= label_tag :unit %>
 <%= number_field_tag 'unit', @product.unit %>
-
+<br>
 <%= label_tag :price %>
 <%= number_field_tag 'price', @product.price %>
-
+<br>
 <%= label_tag :purchase_date %>
 <%= date_field_tag 'purchase_date', @product.purchase_date %>
-
+<br>
+    
+  <%= radio_button_tag :status, true, @product.status, checked: @product.status %>
+  <%= label_tag :status_active, 'Active' %>
+  
+  <%= radio_button_tag :status,false, !@product.status, checked: !@product.status %>
+  <%= label_tag :status_inactive, 'Inactive' %>
+  <br>
+  <%= select_tag :category_id, options_for_select(@categories.map { |category| [category.category_name, category.id] }, @product.category_id) %> <br>
+  <%@tags.each do |tag|%>
+  <% if @product.tags.present? %>
+    <% data = @product.tags.split(',').map(&:strip).include?(tag.tag_name) %>
+  <% else %>  
+    <%data = false%>
+  <% end %>
+    <%= check_box_tag 'tag_name[]', tag.tag_name, data %>
+    <%= label_tag "product_tag_ids_#{tag.id}", tag.tag_name %>
+  <%end%><br>
 <%= submit_tag "Update Product" %>
 
 <% end %>
