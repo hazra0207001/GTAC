@@ -1,43 +1,6 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-  const searchOptionSelect = document.getElementById("search_option");
-  const nameInput = document.getElementById("name_or_category");
-  const purchaseDateStartInput = document.getElementById("purchase_date_start");
-  const purchaseDateEndInput = document.getElementById("purchase_date_end");
-  const activeradio = document.getElementById("status_true");
-  const inactiveradio = document.getElementById("status_false");
-    
-  function toggleInputs(disableName, disableDate, disableType) {
-    nameInput.disabled = disableName;
-    purchaseDateStartInput.disabled = disableDate;
-    purchaseDateEndInput.disabled = disableDate;
-    activeradio.disabled = disableType;
-    inactiveradio.disabled = disableType;
-  }
 
-  // Initial state
-  toggleInputs(true, true, true);
-
-  searchOptionSelect.addEventListener("change", function () {
-    const selectedOption = searchOptionSelect.value;
-
-    switch (selectedOption) {
-      case "Search by name or category":
-        toggleInputs(false, true, true);
-        break;
-      case "Search by purchase date range":
-        toggleInputs(true, false, true);
-        break;
-      case "Search by Status":
-        toggleInputs(true, true, false);
-        break;
-      default:
-        toggleInputs(true, true, true);
-    }
-  });
-});
-</script>
 <%= flash[:notice]%>
+
 <div class ="card mt-5 mb-4">
 
   <div class= "card-body">
@@ -50,19 +13,19 @@
                 </tr>
                 <tr>
                     <td><%= label_tag 'name_category', 'Search by Name Or Category:' %></td>
-                    <td><%= text_field_tag :name_or_category, nil, disabled: true %></td>
+                    <td><%= text_field_tag :name_or_category, nil %></td>
                 </tr>
                 <tr>
                     <td><%= label_tag 'date', 'Search by Date:' %></td>
-                    <td><%= date_field_tag :purchase_date_start, nil, disabled: true %>
-                        <%= date_field_tag :purchase_date_end, nil, disabled: true %></td>
+                    <td><%= date_field_tag :purchase_date_start, nil %>
+                        <%= date_field_tag :purchase_date_end, nil %></td>
                 </tr>
                 <tr>
                     <td><%= label_tag 'status', 'Search by Status:' %></td>
                    
-                    <td id ="status"><%= radio_button_tag :status, true, checked: "checked",disabled: true  %>
+                    <td id ="status"><%= radio_button_tag :status, true, checked: "checked"  %>
                             <%= label_tag 'status_active', 'Active' %>
-                            <%= radio_button_tag :status, false, disabled: true  %>
+                            <%= radio_button_tag :status, false %>
                         <%= label_tag :status_inactive, 'Inactive' %>
                     </td>
                 </tr>

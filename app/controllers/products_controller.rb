@@ -1,21 +1,26 @@
 class ProductsController < ApplicationController
     def index
         #raise params.inspect
+
         #search_term = params[:search]
          #search_term = params[:name_or_category]
+         if params[:purchase_date_start] ==""
+            start_date =Date.new(1900, 2, 4).strftime("%Y-%m-%d")
+         else
+            start_date = params[:purchase_date_start]
+         end
+         if params[:purchase_date_end] ==""
+            end_date =Date.current.strftime("%Y-%m-%d")
+         else
+            end_date = params[:purchase_date_end]
+         end
 
-        if params[:name_or_category].present?
-        #matching_categories = Category.where('name LIKE ?', "%#{search_term}%")
+        search_params={"purchase_date_start" => start_date,"purchase_date_end" =>end_date, "name_or_category" =>params[:name_or_category],"status"=>params[:status]}
+         #raise search_params.inspect
+        @products = Product.search(search_params)
 
-        @products = Product.joins("LEFT JOIN categories ON categories.id = products.category_id")
-                    .where('products.name LIKE :search OR categories.category_name LIKE :search', search: "%#{params[:name_or_category]}%")
-                    .distinct
-        elsif params[:status].present?
-            @products = Product.where(status: params[:status])
-        else
-        @products=Product.all
-        end
-        @tags =Tag.all
+
+
     end
 
     def new
