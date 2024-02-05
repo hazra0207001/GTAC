@@ -19,10 +19,9 @@
                 </tr>
                 <tr>
                     <td><%= label_tag 'status', 'Search by Status:' %></td>
-                   
-                    <td id ="status"><%= radio_button_tag :status, true, checked: "checked"  %>
+                    <td id ="status"><%= radio_button_tag :status, true, params[:status] == 'true' %>
                             <%= label_tag 'status_active', 'Active' %>
-                            <%= radio_button_tag :status, false %>
+                            <%= radio_button_tag :status, false, params[:status] == 'false' %>
                         <%= label_tag :status_inactive, 'Inactive' %>
                     </td>
                 </tr>
