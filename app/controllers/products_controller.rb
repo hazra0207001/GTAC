@@ -4,18 +4,8 @@ class ProductsController < ApplicationController
 
         #search_term = params[:search]
          #search_term = params[:name_or_category]
-         if params[:purchase_date_start] ==""
-            start_date =Date.new(1900, 2, 4).strftime("%Y-%m-%d")
-         else
-            start_date = params[:purchase_date_start]
-         end
-         if params[:purchase_date_end] ==""
-            end_date =Date.current.strftime("%Y-%m-%d")
-         else
-            end_date = params[:purchase_date_end]
-         end
 
-        search_params={"purchase_date_start" => start_date,"purchase_date_end" =>end_date, "name_or_category" =>params[:name_or_category],"status"=>params[:status]}
+        search_params={purchase_date_start: params[:purchase_date_start],purchase_date_end: params[:purchase_date_end], name_or_category:params[:name_or_category],status:params[:status]}
          #raise search_params.inspect
         @products = Product.search(search_params)
 
