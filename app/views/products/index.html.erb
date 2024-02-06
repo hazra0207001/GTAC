@@ -1,7 +1,7 @@
 
 <%= flash[:notice]%>
 
-<div class ="card mt-5 mb-4">
+<div class ="card  ">
 
   <div class= "card-body">
     <%= form_tag "/products", method: :get, id: 'search-form' do %>
@@ -19,9 +19,9 @@
                 </tr>
                 <tr>
                     <td><%= label_tag 'status', 'Search by Status:' %></td>
-                    <td id ="status"><%= radio_button_tag :status, true, params[:status] == 'true' %>
+                    <td id ="status"><%= radio_button_tag :status, true %>
                             <%= label_tag 'status_active', 'Active' %>
-                            <%= radio_button_tag :status, false, params[:status] == 'false' %>
+                            <%= radio_button_tag :status, false %>
                         <%= label_tag :status_inactive, 'Inactive' %>
                     </td>
                 </tr>
@@ -32,42 +32,68 @@
   </div>
 </div>
 
+<div class ="card ">
 
-<div class ="card mt-5 mb-4">
+  <div class= "card-body">
+    <%= form_tag "/products", method: :get, id: 'sort-form' do %>
+        <table style="border: 1px solid black;">
+            <tbody>
+                <tr>
+                    <td><%= label_tag 'sort_by_name', 'Sort By Name:' %></td>
+                    <td id ="sort_name"><%= radio_button_tag :sort_by_name, true, params[:sort_by_name] == "true" %>
+                            <%= label_tag 'sort_ascending', 'Ascending' %>
+                            <%= radio_button_tag :sort_by_name, false, params[:sort_by_name] == "false" %>
+                        <%= label_tag :sort_descending, 'descending' %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <%= submit_tag 'Sort' %>
+    <% end %>
+  </div>
+</div>
+
+
+<div class ="card ">
 
   <div class= "card-body">
     <h2 class = "text-center"> Listing Products </h2>
   </div>
 </div>
-<table>
-    <thead>
-        <tr>
-        <th>NAME</th>
-        <th>UNIT</th>
-        <th>PRICE</th>
-        <th>PURCHASE DATE</th>
-        <th>STATUS</th>
-        <th>Category</th>
-        <th>Tags</th>
-        <th> ACTIONS</th>
-        </tr>
-    </thead>
-    <tbody>
-        <%@products.each do|product|%>
+ 
+<% if @products.present?%>
+    <table>
+        <thead>
             <tr>
-                <td><%=product.name%></td>
-                <td><%=product.unit%></td>
-                <td><%=product.price%></td>
-                <td><%=product.purchase_date%></td>
-                <td><%=product.status ? "Active" : "Inactive"%></td>
-                <td><%=product.category_name%>
-                <td><%=product.tags%></td>
-                
-                    
-                </td>
-                <td><%= link_to "Edit", "/products/#{product.id}/edit" %></td>
-                <td><%= link_to "show","/products/#{product.id}"%>
+            <th>NAME</th>
+            <th>UNIT</th>
+            <th>PRICE</th>
+            <th>PURCHASE DATE</th>
+            <th>STATUS</th>
+            <th>Category</th>
+            <th>Tags</th>
+            <th> ACTIONS</th>
             </tr>
-        <%end%>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <%@products.each do|product|%>
+                <tr>
+                    <td><%=product.name%></td>
+                    <td><%=product.unit%></td>
+                    <td><%=product.price%></td>
+                    <td><%=product.purchase_date%></td>
+                    <td><%=product.status ? "Active" : "Inactive"%></td>
+                    <td><%=product.category_name%>
+                    <td><%=product.tags%></td>
+                    
+                        
+                    </td>
+                    <td><%= link_to "Edit", "/products/#{product.id}/edit" %></td>
+                    <td><%= link_to "show","/products/#{product.id}"%>
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+<% else%>
+    <h1> No such Product Found</h1>
+<%end%>

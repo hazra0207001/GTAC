@@ -5,9 +5,22 @@ class ProductsController < ApplicationController
         #search_term = params[:search]
          #search_term = params[:name_or_category]
 
-        search_params={purchase_date_start: params[:purchase_date_start],purchase_date_end: params[:purchase_date_end], name_or_category:params[:name_or_category],status:params[:status]}
-         #raise search_params.inspect
-        @products = Product.search(search_params)
+
+
+            search_params = {purchase_date_start: params[:purchase_date_start],purchase_date_end: params[:purchase_date_end], name_or_category:params[:name_or_category],status:params[:status]}
+            #raise search_params.inspect
+            products = Product.search(search_params)
+
+            if params[:sort_by_name].present?
+                #raise params[:sort_by_name].class.inspect
+                if params[:sort_by_name] == "true"
+                   @products = products.order("name COLLATE NOCASE")
+                else
+                   @products = products.order("name COLLATE NOCASE DESC")
+                end
+            else
+                @products = products
+            end
 
 
 
