@@ -5,22 +5,45 @@ class ProductsController < ApplicationController
         #search_term = params[:search]
          #search_term = params[:name_or_category]
 
+            def sort_data(sort_order, field_name)
+                if @sort_order == 'asc'
+                    @products = @products.order("#{field_name} COLLATE NOCASE ASC")
+                else
+                    @products = @products.order("#{field_name} COLLATE NOCASE DESC")
+                end
+                @products
+            end
+
+
 
 
             search_params = {purchase_date_start: params[:purchase_date_start],purchase_date_end: params[:purchase_date_end], name_or_category:params[:name_or_category],status:params[:status]}
-            #raise search_params.inspect
-            products = Product.search(search_params)
+            #sorted_by = {sort_order_by_name: params[:sort_order_by_name]}
 
-            if params[:sort_by_name].present?
-                #raise params[:sort_by_name].class.inspect
-                if params[:sort_by_name] == "true"
-                   @products = products.order("name COLLATE NOCASE")
-                else
-                   @products = products.order("name COLLATE NOCASE DESC")
-                end
-            else
-                @products = products
+            products = Product.search(search_params )
+            @products = products
+            if params[:sort_order_by_name].present?
+               @sort_order = params[:sort_order_by_name] || 'asc'
+               field_name = "name"
+               @products = sort_data(@sort_order, field_name)
+            elsif params[:sort_order_by_price].present?
+                @sort_order = params[:sort_order_by_price] || 'asc'
+                field_name = "price"
+               @products = sort_data(@sort_order, field_name)
+            elsif params[:sort_order_by_unit].present?
+                @sort_order = params[:sort_order_by_unit] || 'asc'
+               field_name = "unit"
+               @products = sort_data(@sort_order, field_name)
+            elsif params[:sort_order_by_date].present?
+                @sort_order = params[:sort_order_by_date] || 'asc'
+               field_name = "purchase_date"
+               @products = sort_data(@sort_order, field_name)
             end
+
+
+            @next_sort_order = @sort_order == 'asc' ? 'desc' : 'asc'
+
+
 
 
 

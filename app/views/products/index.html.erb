@@ -32,26 +32,7 @@
   </div>
 </div>
 
-<div class ="card ">
 
-  <div class= "card-body">
-    <%= form_tag "/products", method: :get, id: 'sort-form' do %>
-        <table style="border: 1px solid black;">
-            <tbody>
-                <tr>
-                    <td><%= label_tag 'sort_by_name', 'Sort By Name:' %></td>
-                    <td id ="sort_name"><%= radio_button_tag :sort_by_name, true, params[:sort_by_name] == "true" %>
-                            <%= label_tag 'sort_ascending', 'Ascending' %>
-                            <%= radio_button_tag :sort_by_name, false, params[:sort_by_name] == "false" %>
-                        <%= label_tag :sort_descending, 'descending' %>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <%= submit_tag 'Sort' %>
-    <% end %>
-  </div>
-</div>
 
 
 <div class ="card ">
@@ -65,10 +46,11 @@
     <table>
         <thead>
             <tr>
-            <th>NAME</th>
-            <th>UNIT</th>
-            <th>PRICE</th>
-            <th>PURCHASE DATE</th>
+            <th><%= link_to "NAME", products_path(sort_order_by_name: @next_sort_order) %>
+</th>
+            <th><%= link_to "UNIT", products_path(sort_order_by_unit: @next_sort_order) %></th>
+            <th> <%= link_to "PRICE", products_path(sort_order_by_price: @next_sort_order) %></th>
+            <th> <%= link_to "PURCHASE DATE", products_path(sort_order_by_date: @next_sort_order) %></th>
             <th>STATUS</th>
             <th>Category</th>
             <th>Tags</th>

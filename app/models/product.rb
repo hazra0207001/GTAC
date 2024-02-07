@@ -31,7 +31,7 @@ class Product < ApplicationRecord
 
 
 
-  def self.search(options = {})
+  def self.search(options = {}, sorted_by = {})
 
     query = all
       if options[:name_or_category].present?
